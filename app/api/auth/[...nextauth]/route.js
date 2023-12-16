@@ -3,10 +3,6 @@ import GoogleProvider from 'next-auth/providers/google';
 import { connectToDB } from '@utils/database';
 import User from "@models/user";
 
-// console.log({
-//     clientId: process.env.GOOGLE_ID,
-//     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-// })
 
 const handler = NextAuth({
     providers: [
@@ -17,6 +13,7 @@ const handler = NextAuth({
     ],
 
     async session({session}) {
+    // to get the data about user everytime for session
         const sessionUser = await User.findOne({
             email: session.user.email
         })
@@ -29,7 +26,7 @@ const handler = NextAuth({
             //serverless route
             await connectToDB();
             //check if a user already exists
-            const userExists = await userAgent.findOne({ 
+            const userExists = await User.findOne({ 
                 email : profile.email 
             })
             //if not create a new user

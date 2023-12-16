@@ -1,29 +1,18 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
-    images: {
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: 'lh3.googleusercontent.com',
-          port: '',
-          pathname: '/a/ACg8ocJBHBvFDzSa_u-TxF5wMlJTy_lA0pVPdTVB_RKKA5y4lU8=s96-c',
-        },
-      ],
-    },
-  }
+const nextConfig = {
+  experimental: {
+    serverComponentsExternalPackages: ["mongoose"],
+  },
+  images: {
+    domains: ["lh3.googleusercontent.com"],
+  },
+  webpack(config) {
+    config.experiments = {
+      ...config.experiments,
+      topLevelAwait: true,
+    };
+    return config;
+  },
+};
 
- 
-
-//   module.exports = {
-//     images: {
-//   formats: ['image/avif', 'image/webp'],
-//       remotePatterns: [
-//         {
-//           protocol: 'https',
-//           hostname: 'assets.example.com',
-//           port: '',
-//           pathname: '/account123/**',
-//         },
-//       ],
-//     },
-//   }
+module.exports = nextConfig;
