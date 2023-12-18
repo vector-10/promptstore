@@ -2,13 +2,41 @@
 import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
 
+// one time use Promptcard
+const PromptCardList = ({ data, handleTagClick }) => {
+  return(
+    <div className="mt-16 prompt_layout">
+      {data.map((post) => (
+        <PromptCard 
+        key ={post._id}
+        post={post}
+        handleTagClick = {handle}
+        />
+      ))}
+
+    </div>
+  )
+}
+
+//functional react component Feed
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
+  const [posts, setPosts] = useState([]);
 
   const handleSearchChange = () => {
     e.preventDefault();
-    
+
   }
+//useEffect to handle API call to get the data
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await fetch('/api/prompt');
+      const data = await response.json();
+
+      setPosts(data);
+    }
+    fetchPosts();
+  },[])
 
 
   return (
@@ -23,6 +51,11 @@ const Feed = () => {
         className="search_imput peer"
         />         
       </form>
+
+      <PromptCardList 
+      data={posts}
+      handleTagClick={() => {}}
+      />
     </section>
   )
 }
