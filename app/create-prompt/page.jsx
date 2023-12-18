@@ -12,11 +12,14 @@ const CreatePrompt = () => {
   });
 
   const CreatePrompt = async (e) => {
+    const router = useRouter();
+    const { data:session } = useSession();
+    // to prevent the default behaviour of browsers in our apps
     e.preventDefault();
     setSubmitform(true);
 
     try {
-      const response = await fetch("/api/prompt/new", {
+      const response = await fetch("/api/prompt/new/", {
         method: 'POST',
         body: JSON.stringify({
           prompt: post.prompt,
