@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
 
-// one time use Promptcard
 const PromptCardList = ({ data, handleTagClick }) => {
   return(
     <div className="mt-16 prompt_layout">
@@ -13,7 +12,6 @@ const PromptCardList = ({ data, handleTagClick }) => {
         handleTagClick = {handle}
         />
       ))}
-
     </div>
   )
 }
@@ -27,7 +25,7 @@ const Feed = () => {
     e.preventDefault();
 
   }
-//useEffect to handle API call to get the data
+//useEffect to handle API call to get the data with fetch API
   useEffect(() => {
     const fetchPosts = async () => {
       const response = await fetch('/api/prompt');
@@ -48,10 +46,9 @@ const Feed = () => {
         value={searchText}
         onChange={handleSearchChange}
         required
-        className="search_imput peer"
+        className="search_input peer"
         />         
       </form>
-
       <PromptCardList 
       data={posts}
       handleTagClick={() => {}}

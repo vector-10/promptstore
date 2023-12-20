@@ -1,3 +1,4 @@
+// This page displays the user profile and posts in form of prmompts.
 "use client"
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
