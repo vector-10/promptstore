@@ -15,7 +15,6 @@ const PromptCardList = ({ data, handleTagClick }) => {
     </div>
   )
 }
-
 //functional react component Feed
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
@@ -23,7 +22,6 @@ const Feed = () => {
 
   const handleSearchChange = () => {
     e.preventDefault();
-
   }
 //useEffect to handle API call to get the data with fetch API
   useEffect(() => {
@@ -34,7 +32,6 @@ const Feed = () => {
     }
     fetchPosts();
   },[])
-
 
   return (
     <section className="feed">

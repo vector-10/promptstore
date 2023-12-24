@@ -6,18 +6,17 @@ import Form from "@components/Form";
 
 const CreatePrompt = () => {
   const [submitform, setSubmitform] = useState(false);
+  const router = useRouter();
+  const { data:session } = useSession();
   const [post, setPost] = useState({
     prompt: "",
     tag: "",
   });
 
   const createPrompt = async (e) => {
-    const router = useRouter();
-    const { data:session } = useSession();
     // to prevent the default behaviour of browsers in our apps
     e.preventDefault();
     setSubmitform(true);
-
     try {
       const response = await fetch("/api/prompt/new", {
         method: 'POST',

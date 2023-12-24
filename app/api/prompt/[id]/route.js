@@ -2,7 +2,7 @@ import { connectToDB } from "@utils/database";
 import Prompt from "@models/prompt";
 
 // GET (read) to  find only one prompt
-export const GET = async (request, {params}) => {
+export const GET = async (req, {params}) => {
     //the params prop added at the top is to make inclusion for the ID
     try {
         await connectToDB();
@@ -21,7 +21,7 @@ export const GET = async (request, {params}) => {
 }
 
 // PATCH (update)
-export const PATCH = async (request, {params}) => {
+export const PATCH = async (req, {params}) => {
     const { prompt, tag } = await request.json(); 
     try {
         await connectToDB();
@@ -50,7 +50,7 @@ export const PATCH = async (request, {params}) => {
 export const DELETE = async (request, {params}) => {
     try {
          await connectToDB();
-         // mongoose method to 
+         // mongoose method to find documents by ID and preform operations on them, in this case delete them
          await Prompt.findByIdAndRemove(params.id);
          return new Response("Prompt deleted successfully", { status:200 })
     } catch (error) {

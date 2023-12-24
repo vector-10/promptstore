@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Profile from "@components/profile";
-import React from 'react'
 
 const MyProfile = () => {
   const { data: session } = useSession();
@@ -16,7 +15,6 @@ const MyProfile = () => {
       //api call to a dynamic api endpoint for specific user posts with the user id.
       const response = await fetch(`/api/users/${session?.user.id}/posts`);
       const data = await response.json();
-
       setPosts(data);
     }
     console.log(posts);     
@@ -34,7 +32,7 @@ const MyProfile = () => {
     // Last check to enure that the user really want to delete a prompt
     if(hasConfirmed) {
       try {
-        await fetch(`/api/prompt/${post._id.toString()}`, {
+        await fetch(`/api/prompt/${post._id}`, {
           method:'DELETE'
         });
         const filteredPosts = posts.filter((p) => p._id !== post._id); 

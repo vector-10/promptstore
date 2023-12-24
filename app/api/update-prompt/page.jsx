@@ -13,19 +13,32 @@ const EditPrompt = () => {
     tag: "",
   });
 
-  useEffect(() => {
-        const getPromptDetails = async () => {
-            const response = await fetch(`/api/prompt${promptId}`)
-            const data = await response.json();
-        }
+  // useEffect(() => {
+  //       const getPromptDetails = async () => {
+  //           const response = await fetch(`/api/prompt${promptId}`)
+  //           const data = await response.json();
+  //       }
 
+  //       setPost({
+  //           prompt: data.prompt,
+  //           tag: data.tag
+  //       })
+
+  //       if(promptId) {getPromptDetails();}
+  // }, [promptId])
+
+    //get the prompt and populate the form
+    useEffect(() => {
+      (async () => {
+        const response = await fetch(`/api/prompt/${promptId}`);
+        const data = await response.json();
         setPost({
-            prompt: data.prompt,
-            tag: data.tag
-        })
-
-        if(promptId) {getPromptDetails();}
-  }, [promptId])
+          prompt: data.prompt,
+          tag: data.tag,
+        });
+      })();
+    }, [promptId]);
+  
 
   const updatePrompt = async (e) => {
     e.preventDefault();
@@ -34,7 +47,6 @@ const EditPrompt = () => {
     if(!promptId){
         return alert("Prompt ID not found")
     }
-
     try {
       const response = await fetch(`/api/prompt/${promptId}`, {
         method: 'PATCH ',
@@ -44,7 +56,8 @@ const EditPrompt = () => {
          })
       })
       if(response.ok) {
-        router.push('/')
+        alert('success')
+        router.push('/profile')
       }
     } catch (error) {
       console.log(error);
