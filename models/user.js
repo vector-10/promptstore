@@ -1,21 +1,25 @@
-import { Schema, model, models } from "mongoose";
+import mongoose, { models } from "mongoose";
 
-const UserSchema = new Schema({
-    email:{
-        type: String,
-        unique:[true, "Email already exists!!"],
-        required:[true, "Email is required!!"]
-    },
-    username: {
-        type: String,
-        required: [true, "Username is required!!"],
-        match: [/^(?=.{6,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, "Username invalid, it should contain 6-20 alphanumeric letters and be unique!"]
-    },
-    image: {
-        type: String,
-    }
+const userSchema = new mongoose.Schema({
+  email: {
+    type: "String",
+    unique: [true, "Email Already Exists"],
+    required: [true, "Email is Required"],
+  },
+  userName: {
+    type: "String",
+    required: [true, "Username is required"],
+    match: [
+      /^(?=.{8,20}$)(?![0-9]+$)(?!.*?\s)[a-zA-Z0-9]+$/,
+      "Username invalid, it should contain 8 - 20 alphanumeric letters and must be unique!",
+    ],
+  },
+  image: {
+    type: "String",
+    required: [true, "image is required"],
+  },
 });
 
-const User = models.User || model("User", UserSchema)
 
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 export default User;

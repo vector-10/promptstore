@@ -11,13 +11,12 @@ const Form = ({ type, post, setPost, submitform, handleSubmit }) => {
         {type} and share your intelligently crafted prompts with the world,
         improve the results you get from AI searches by using prompts by others too.
       </p>
-
       <form 
       onSubmit={handleSubmit}
       className="mt-10 w-full max-w-2xl flex
        flex-col gap-7 glassmorphism"
       >
-        <label>
+        <label htmlFor="">
           <span className="font-satoshi font-semi-bold
            text-base text-gray-700">
              Your AI Prompt 
@@ -30,7 +29,7 @@ const Form = ({ type, post, setPost, submitform, handleSubmit }) => {
             className="form_textarea"
             />
         </label>
-        <label>
+        <label htmlFor="">
           <span className="font-satoshi font-semi-bold
            text-base text-gray-700">
              Tag {` `}
@@ -59,9 +58,8 @@ const Form = ({ type, post, setPost, submitform, handleSubmit }) => {
           </button>
         </div>
       </form>
-
     </section>
   )
 }
 
-export default Form
+export default Form;

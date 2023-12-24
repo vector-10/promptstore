@@ -6,7 +6,7 @@ import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const  Nav = () => {
     const { data: session } =  useSession();
-    //providers for signin function
+    //providers state for signin function
     const [ providers, setProviders] = useState(null);
     const [toggleDropdown, setToggleDropdown] = useState(false);
 
@@ -23,7 +23,7 @@ const  Nav = () => {
     <nav className="flex-between w-full mb-16 pt-3">
         <Link href="/" className="flex page-2 flex-center">
             <Image 
-            alt="image logo"
+            alt="Promptstore logo"
             src="/assets/images/logo.svg"
             width={30}
             height={30}
@@ -39,7 +39,7 @@ const  Nav = () => {
                     Create Post
                  </Link>
 
-                 <button type="button" onClick={signOut} className="outline_btn">
+                 <button className="outline_btn" type="button" onClick={signOut}>
                     Sign Out
                  </button>
 
@@ -74,7 +74,7 @@ const  Nav = () => {
         <div className="sm:hidden flex relative">
             {session?.user ? 
             (
-                <div className="flex">
+                <div className="flex gap-3 md:gap-5">
                     <Image 
                     src={session?.user.image}
                     width={37}
@@ -118,16 +118,14 @@ const  Nav = () => {
                 key={provider.name} 
                 onClick={ () => signIn(provider.id)}
                 className="black_btn">
-                    Sign In
+                   {provider.name}  Sign In
                 </button>
             ))}
             </>
             )}
-
         </div>
-
     </nav>
   )
 }
 
-export default Nav
+export default Nav;
